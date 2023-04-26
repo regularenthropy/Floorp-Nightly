@@ -13,6 +13,3 @@ sidebar-menu-synced-tabs =
 
 sidebar-menu-close =
   .label = Close Sidebar
-
-sidebar-close-button =
-  .tooltiptext = Close sidebar

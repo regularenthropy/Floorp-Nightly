@@ -519,8 +519,6 @@ bsb-context-link-add =
 
 open-profile-dir = 
     .label = Open Profile Directory
-appmenuitem-reboot =
-    .label = Reboot
 
 ####################################################################### menu ###############################################################
 
