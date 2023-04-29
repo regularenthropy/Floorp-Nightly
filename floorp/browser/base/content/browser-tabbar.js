@@ -138,7 +138,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const tabs = document.querySelector(`#tabbrowser-tabs`)
   tabs.on_wheel = (event) => {
-	  console.log("aaaaa")
     console.log(event)
     let nowTabIndex = tabs.selectedIndex
 	  if (Services.prefs.getBoolPref("toolkit.tabbox.switchByScrolling")) {
