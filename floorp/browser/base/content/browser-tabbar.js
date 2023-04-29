@@ -135,4 +135,20 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
   Services.prefs.addObserver("floorp.tabbar.style", applyMultitab);
+
+  const tabs = document.querySelector(`#tabbrowser-tabs`)
+  tabs.on_wheel = (event) => {
+	  console.log("aaaaa")
+    console.log(event)
+    let nowTabIndex = tabs.selectedIndex
+	  if (Services.prefs.getBoolPref("toolkit.tabbox.switchByScrolling")) {
+		  if (event.deltaY > 0 != Services.prefs.getBoolPref("floorp.tabscroll.reverse")) {
+			  tabs.advanceSelectedTab(1, Services.prefs.getBoolPref("floorp.tabscroll.wrap"));
+		  } else {
+			  tabs.advanceSelectedTab(-1, Services.prefs.getBoolPref("floorp.tabscroll.wrap"));
+		  }
+      event.preventDefault();
+		  event.stopPropagation();
+	  }
+  }
 }, { once: true })

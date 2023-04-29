@@ -29,6 +29,8 @@ Preferences.addAll([
   { id: "floorp.browser.tabs.openNewTabPosition", type: "int" },
   { id: "services.sync.prefs.sync.floorp.browser.note.memos", type: "bool" },
   { id: "floorp.browser.workspace.tab.enabled", type: "bool" },
+  { id: "floorp.tabscroll.reverse", type: "bool" },
+  { id: "floorp.tabscroll.wrap", type: "bool" },
 ]);
 
 window.addEventListener("pageshow", async function() {

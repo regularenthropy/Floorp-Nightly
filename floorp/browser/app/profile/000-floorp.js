@@ -50,6 +50,8 @@ pref("floorp.fluerial.roundVerticalTabs",false); //垂直タブのタブの形 t
 
 pref("floorp.browser.user.interface", 3);// Floorp 10 系以降のインターフェーステーマ設定
 pref("floorp.browser.tabbar.settings", 0);// タブの設定
+pref("floorp.tabscroll.reverse",false);
+pref("floorp.tabscroll.wrap",false);
 
 pref("floorp.enable.auto.restart", false);
 
