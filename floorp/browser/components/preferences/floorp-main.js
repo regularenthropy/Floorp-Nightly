@@ -128,6 +128,19 @@ window.addEventListener("pageshow", async function() {
     window.location.href = "about:preferences#notes";
   });
 
+  Services.prefs.addObserver("toolkit.tabbox.switchByScrolling", function() {
+    let isEnabled = Services.prefs.getBoolPref("toolkit.tabbox.switchByScrolling");
+    let tabscrollReverse = document.querySelector('[preference="floorp.tabscroll.reverse"]');
+    let tabscrollWrap = document.querySelector('[preference="floorp.tabscroll.wrap"]');
+    if (isEnabled) {
+      tabscrollReverse.removeAttribute("disabled");
+      tabscrollWrap.removeAttribute("disabled");
+    } else {
+      tabscrollReverse.setAttribute("disabled", "true");
+      tabscrollWrap.setAttribute("disabled", "true");
+    }
+  });
+
   {
     const basePrefName = "extensions.checkCompatibility";
     const isNightlyPref = ![
