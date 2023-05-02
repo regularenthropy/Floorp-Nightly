@@ -25,8 +25,16 @@
   }
   
   :root {
-    --default-vertitaltab-width: 3em;
+    --default-vertitaltab-width: 42px;
     --hoverd-verticaltab-width: 20em;
+  }
+
+  :root[uidensity=compact]{
+    --default-vertitaltab-width: 35px !important;
+  }
+
+  :root[uidensity=touch]{
+    --default-vertitaltab-width: 60px !important;
   }
     
   
@@ -51,8 +59,13 @@
 margin:auto !important;
 }
 
+#sidebar-box:not(:hover)  .tab-icon-stack{
+  padding-left: 0.5px;
+  }
+
 #sidebar-box:not(:hover) .tab-content{
   --inline-tab-padding:0px !important;
+  padding-inline: 0px !important;
 }
 #sidebar-box .tabbrowser-tab{
   margin-right: 1px !important;
