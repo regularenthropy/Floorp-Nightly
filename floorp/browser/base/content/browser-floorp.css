@@ -432,6 +432,8 @@ toolbar #workspace-button:not([disabled="true"], [checked], [open], :active):hov
 #workspace-button{
   transition:all 0.2s ease !important;
   appearance:none !important;
+  border-right: 1px solid color-mix(in srgb, currentColor 25%, transparent);
+  margin-inline-start: 2px;
 }
 #workspace-button:hover{
   color:inherit;

@@ -37,7 +37,6 @@ function initWorkspace() {
       let label = workspaceAll[i];
       addWorkspaceElemToMenu(label);
     }
-    //
     let Tag = document.createElement("style");
     Tag.innerText = `
         .tabbrowser-tab[first-visible-unpinned-tab="true"] > .tab-stack > .tab-content > .tab-close-button{
@@ -98,7 +97,14 @@ function setCurrentWorkspace() {
     } else {
       gBrowser.hideTab(tab);
     }
-    document.getElementById("workspace-button").setAttribute("label", currentWorkspace);
+
+    if(currentWorkspace != l10n.formatValueSync("workspace-default")){
+      document.getElementById("workspace-button").setAttribute("label", currentWorkspace);
+      document.querySelector("#workspace-button > .toolbarbutton-text").style.display = "inherit"
+    } else {
+      document.getElementById("workspace-button").removeAttribute("label");
+      document.querySelector("#workspace-button > .toolbarbutton-text").style.display = "none"
+    }
   }
   lastTab?.setAttribute("floorp-lastVisibleTab","true")
 } 
