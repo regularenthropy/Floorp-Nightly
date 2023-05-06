@@ -37,14 +37,6 @@ function initWorkspace() {
       let label = workspaceAll[i];
       addWorkspaceElemToMenu(label);
     }
-    let Tag = document.createElement("style");
-    Tag.innerText = `
-        .tabbrowser-tab[first-visible-unpinned-tab="true"] > .tab-stack > .tab-content > .tab-close-button{
-            display: none !important;
-        }
-    `;
-    Tag.setAttribute("id", "floorp-micaforeveryone");
-    document.head.appendChild(Tag);
 }
 function deleteworkspace(workspace) {
  if  (workspace !== defaultWorkspaceName) {
