@@ -12,6 +12,11 @@
     border-top: none;
   }
 
+  #tabbrowser-tabpanels{
+    background: var(--toolbar-bgcolor) !important;
+    background-color: var(--toolbar-bgcolor) !important;
+  }
+
   :root[inDOMFullscreen] :is(.browserContainer),
   :root[inFullscreen]:not([macOSNativeFullscreen]) :is(.browserContainer) {
     border: none !important;
@@ -36,6 +41,7 @@
   #tabbrowser-tabbox[flex], #tabbrowser-tabpanels, browser[type="content-primary"], browser[type="content"] > html{
     background: var(--toolbar-bgcolor) !important;
     background-color: var(--toolbar-bgcolor) !important;
+    clip-path: inset(0px 0px 0px round 15px 0) !important;
   }
   
   #tabbrowser-tabbox {
