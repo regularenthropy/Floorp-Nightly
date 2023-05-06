@@ -16,6 +16,9 @@ browser.jar:
 #verticalTab
   skin/classic/browser/verticaltab.svg                                    (icons/verticaltab.svg)
 
+# Workspace
+  skin/classic/browser/workspace-floorp.png                               (icons/workspace-floorp.png)
+
 # options
   skin/classic/browser/options/micaforeveryone.css                        (designs/options/micaforeveryone.css)
   skin/classic/browser/options/move_page_inside_searchbar.css             (designs/options/move_page_inside_searchbar.css)

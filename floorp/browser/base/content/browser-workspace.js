@@ -258,7 +258,7 @@ window.setTimeout(function(){
                     label="Workspace"
                     tooltiptext="Workspace"
                     type="menu"
-                    style="list-style-image: url('chrome://browser/skin/topsites.svg');">
+                    style="list-style-image: url('chrome://browser/skin/workspace-floorp.png');">
       <menupopup id="workspace-menu" context="workspace-menu-context">
          <menuseparator id="workspace-menu-separator"/>
          <toolbarbutton style="list-style-image: url('chrome://global/skin/icons/plus.svg');"

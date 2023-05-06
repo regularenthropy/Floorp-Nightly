@@ -393,6 +393,7 @@
 
 #workspace-button > .toolbarbutton-icon {
   border-radius: var(--tab-border-radius) 0px 0px var(--tab-border-radius) !important;
+  scale: 1.5;
 }
 toolbar #workspace-button:not([disabled="true"]):is([open], [checked], :hover:active) > .toolbarbutton-icon,
 toolbar #workspace-button:not([disabled="true"], [checked], [open], :active):hover > .toolbarbutton-icon,
