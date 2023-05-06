@@ -13,14 +13,12 @@
   }
 
   :root[inDOMFullscreen] :is(.browserContainer),
-  :root[inFullscreen]:not([macOSNativeFullscreen]) :is(.browserContainer),
-  *|*:root[chromehidden~="toolbar"] .browserContainer {
+  :root[inFullscreen]:not([macOSNativeFullscreen]) :is(.browserContainer) {
     border: none !important;
   }
 
   :root[inDOMFullscreen] :is(.browserContainer) > .browserStack > *,
-  :root[inFullscreen]:not([macOSNativeFullscreen]) :is(.browserContainer) > .browserStack > *,
-  *|*:root[chromehidden~="toolbar"], .browserStack > * {
+  :root[inFullscreen]:not([macOSNativeFullscreen]) :is(.browserContainer) > .browserStack > * {
     border: none !important;
     border-radius: 0 !important;
   }

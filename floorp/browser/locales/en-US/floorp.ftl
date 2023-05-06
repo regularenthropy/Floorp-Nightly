@@ -427,6 +427,42 @@ backup-option-button = Open Backup Options...
 restore-from-backup-prompt-title = Floorp Notes Restore Service
 restore-from-this-backup = Restore Notes to the state of this backup ?
 
+restore-button = Restore
+
+## user.js
+header-userjs = user.js
+userjs-customize = Customize { -brand-short-name } with user.js
+about-userjs-customize = user.js is a configuration file that allows you to customize { -brand-short-name }. user.js will download from the Internet and overwrite the original user.js file. Please back up the original user.js file before using it. config will be applied after restarting { -brand-short-name }.
+
+userjs-label = user.js list
+userjs-prompt = Floorp user.js
+apply-userjs-attention = This will overwrite the original user.js file.
+apply-userjs-attention2 = Please back up the original user.js file before using it.
+
+userjs-button = Open user.js options...
+userjs-select-option = Select user.js
+
+apply-userjs-button = Apply
+## userjs Options
+
+default-userjs-label = Floorp Default
+about-default-userjs = Telemetry disabled. Well balanced { -brand-short-name } with various customizations enabled.
+
+Securefox-label = Yokoffing Securefox
+about-Securefox = HTTPS-by-Default. Total Cookie Protection with site isolation. Enhanced state and network partitioning. Various other enhancements.
+
+default-label = Yokoffing Default
+about-default = All the essentials. None of the breakage. This is your user.js.
+
+Fastfox-label = Yokoffing Fastfox
+about-Fastfox = Immensely increase Firefox's browsing speed. Give Chrome a run for its money!
+
+Peskyfox-label = Yokoffing Peskyfox
+about-Peskyfox = Unclutter the new tab page. Remove Pocket. Restore compact mode as an option. Stop webpage notifications, pop-ups, and other annoyances.
+
+Smoothfox-label = Yokoffing Smoothfox
+about-Smoothfox = Get Edge-like smooth scrolling on your favorite browser — or choose something more your style.
+
 ################################################################### browser ###############################################################
 
 rest-mode = Taking a break...
@@ -693,3 +729,14 @@ workspace-button = Workspace
 workspace-default = Default
 workspace-add = 
  .label= Add New Workspace
+
+workspace-context-menu-selected-tab =
+ .label = Selected tab cannot be moved
+move-tab-another-workspace =
+ .label = Move to another workspace
+
+######################################################################### menubar item ###############################################################
+
+sharemode-menuitem =
+  .label = Share Mode
+  .accesskey = S

@@ -22,3 +22,26 @@ function addContextBox(id,l10n,insert,runFunction,checkID,checkedFunction){
 function contextMenuObserverFunc(){
   for(const elem of checkItems) elem()
 }
+
+/********************* Share mode *********************************/
+
+let beforeElem = document.getElementById("menu_openFirefoxView");
+let addElem = window.MozXULElement.parseXULToFragment(`
+    <menuitem data-l10n-id="sharemode-menuitem" type="checkbox" id="toggle_sharemode" checked="false"
+          oncommand="addOrRemoveShareModeCSS();" accesskey="S">
+    </menuitem>
+`);
+beforeElem.after(addElem);
+
+function addOrRemoveShareModeCSS(){
+  let CSSexist = document.getElementById("sharemode");
+
+  if(CSSexist == null){
+    let CSS = document.createElement("style");
+    CSS.id = "sharemode";
+    CSS.innerText = "@import url(chrome://browser/skin/options/sharemode.css)";
+    document.head.appendChild(CSS);
+  } else {
+    document.getElementById("sharemode").remove();
+  }
+}

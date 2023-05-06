@@ -128,6 +128,10 @@ window.addEventListener("pageshow", async function() {
     window.location.href = "about:preferences#notes";
   });
 
+  document.getElementById("userjsOptionsButton").addEventListener("click", function () {
+    window.location.href = "about:preferences#userjs";
+  });
+
   Services.prefs.addObserver("toolkit.tabbox.switchByScrolling", function() {
     let isEnabled = Services.prefs.getBoolPref("toolkit.tabbox.switchByScrolling");
     let tabscrollReverse = document.querySelector('[preference="floorp.tabscroll.reverse"]');

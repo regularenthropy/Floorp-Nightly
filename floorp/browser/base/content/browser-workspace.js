@@ -46,7 +46,6 @@ function initWorkspace() {
     Tag.setAttribute("id", "floorp-micaforeveryone");
     document.head.appendChild(Tag);
 }
-
 function deleteworkspace(workspace) {
  if  (workspace !== defaultWorkspaceName) {
   let allWorkspaces = Services.prefs.getCharPref(WORKSPACE_ALL_PREF).split(",");
@@ -175,7 +174,7 @@ function addNewWorkspace() {
   var input = {placeHolder: "Workspace Name"};
   let result = prompts.prompt(null, l10n.formatValueSync("workspace-prompt-title"), l10n.formatValueSync("please-enter-workspace-name"), input, null, check);
 
-  if (result && allWorkspace.indexOf(input.value) == -1 && input.value != "") {
+  if (result && allWorkspace.indexOf(input.value) == -1 && input.value != "" && input.value.length < 20) {
     let label = input.value;
     let workspaceAll = Services.prefs.getStringPref(WORKSPACE_ALL_PREF).split(",");
     try {
@@ -192,6 +191,69 @@ function addNewWorkspace() {
     prompts.alert(null, l10n.formatValueSync("workspace-prompt-title"), l10n.formatValueSync("workspace-error") + "\n" + l10n.formatValueSync("workspace-error-discription"));
   }
 }
+
+// tab context menu (move tab to other workspace)
+function addContextMenuToTabContext() {
+  let beforeElem = document.getElementById("context_moveTabOptions")
+  let menuitemElem = window.MozXULElement.parseXULToFragment(`
+  <menu id="context_MoveOtherWorkspace" data-l10n-id="move-tab-another-workspace" accesskey="D">
+      <menupopup id="workspaceTabContextMenu"
+                 onpopupshowing="CreateWorkspaceContextMenu();"/>
+  </menu>
+  `);
+  beforeElem.before(menuitemElem);
+}
+addContextMenuToTabContext();
+
+function checkTabsLength(){
+  let tabs = gBrowser.tabs;
+  for(let i = 0; i < tabs.length; i++){
+    if(TabContextMenu.contextTab.getAttribute("firstVisibleTab") == "true"){
+      document.getElementById("context_MoveOtherWorkspace").setAttribute("disabled", "true");
+    }
+  }
+}
+
+function CreateWorkspaceContextMenu(){
+  //delete already exsist items
+  let menuElem = document.getElementById("workspaceTabContextMenu");
+  while(menuElem.firstChild){
+    menuElem.removeChild(menuElem.firstChild);
+  }
+
+  //Rebuild context menu
+  if(TabContextMenu.contextTab == gBrowser.selectedTab){
+    let menuItem = window.MozXULElement.parseXULToFragment(`
+      <menuitem data-l10n-id="workspace-context-menu-selected-tab" disabled="true"/>
+    `)
+    let parentElem = document.getElementById("workspaceTabContextMenu");
+    parentElem.appendChild(menuItem);
+    return;
+  }
+  let workspaceAll = Services.prefs.getStringPref(WORKSPACE_ALL_PREF).split(",");
+  for(let i = 0; i < workspaceAll.length; i++){
+    let workspace = workspaceAll[i]
+    let menuItem = window.MozXULElement.parseXULToFragment(`
+      <menuitem id="workspaceID-${workspace}" class="workspaceContextMenuItems"
+                label="${workspace}"  oncommand="moveTabToOtherWorkspace(TabContextMenu.contextTab, '${workspace}');"/>
+    `)
+    let parentElem = document.getElementById("workspaceTabContextMenu");
+    if(workspace != TabContextMenu.contextTab.getAttribute("floorp-workspace")){
+      parentElem.appendChild(menuItem);
+    }
+  }
+}
+
+function moveTabToOtherWorkspace(tab, workspace){
+  if(gBrowser.tabs.selectedTab == tab){
+    gBrowser.selectedTab = gBrowser.tabs[gBrowser.tabs.length - 1];
+  }
+  let willMoveWorkspace = workspace;
+  tab.setAttribute("floorp-workspace", willMoveWorkspace);
+  saveWorkspaceState();
+  setCurrentWorkspace();
+}
+
 
 window.setTimeout(function(){
   let list = Services.wm.getEnumerator("navigator:browser");

@@ -20,7 +20,7 @@ const gNotesPane = {
         let elem = window.MozXULElement.parseXULToFragment(`
               <richlistitem>
                 <label value="${coventToDateAndTime(Number(Object.keys(content.data)[i]))}" class="backup-date"/>
-                <button class="restore-button" id="${Object.keys(content.data)[i]}" label="Restore"/>
+                <button class="restore-button" id="${Object.keys(content.data)[i]}" data-l10n-id="restore-button"/>
               </richlistitem>
             `);
         document.getElementById("backup-list").appendChild(elem);

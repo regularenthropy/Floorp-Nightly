@@ -645,3 +645,37 @@
     font-size: 1.25em;
     font-weight: bold;
   }
+
+  #userjs-list {
+    padding: 12px 16px;
+    background: var(--card-background) !important;
+    box-shadow: var(--card-shadow) !important;
+    border-radius: 4px !important;
+    border: 0 !important;
+    margin-top: 1em;
+  }
+
+  #userjss-label {
+    font-size: 1.25em;
+    font-weight: bold;
+  }
+
+  #userjs-list > richlistitem {
+    padding: 0.5em;
+    border-bottom: 1px solid var(--in-content-border-color);
+  }
+
+  #userjs-list > richlistitem[selected="true"] {
+    background-color: unset !important;
+    color: unset !important;
+  }
+
+  .userjs-list-vbox {
+    width: 85%;
+  }
+
+  .apply-userjs-button {
+    margin-top: auto;
+    margin-bottom: auto;
+    width: 15%;
+  }
