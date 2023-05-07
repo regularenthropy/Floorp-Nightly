@@ -2,17 +2,27 @@
    - License, v. 2.0. If a copy of the MPL was not distributed with this
    - file, You can obtain one at http://mozilla.org/MPL/2.0/. */
   
-   .browserStack > * {
+  .browserStack > * {
     border: 1px solid var(--chrome-content-separator-color);
     border-radius: 15px;
   }
-  
+
+  .webpanels {
+    border-radius: 10px !important;
+    clip-path: inset(0px 0px 0px round 10px 0) !important;
+  }
+
   .browserContainer {
-    border: solid 3px var(--toolbar-bgcolor);
+    border: solid 5px var(--toolbar-bgcolor);
     border-top: none;
   }
 
   #tabbrowser-tabpanels{
+    background: var(--toolbar-bgcolor) !important;
+    background-color: var(--toolbar-bgcolor) !important;
+  }
+
+  #appcontent[flex] {
     background: var(--toolbar-bgcolor) !important;
     background-color: var(--toolbar-bgcolor) !important;
   }
