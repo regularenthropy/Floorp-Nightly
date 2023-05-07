@@ -62,6 +62,7 @@ function deleteworkspace(workspace) {
   let currentWorkspace = Services.prefs.getStringPref(WORKSPACE_CURRENT_PREF);
   if (currentWorkspace == workspace) {
     Services.prefs.setStringPref(WORKSPACE_CURRENT_PREF, allWorkspaces[0]);
+    changeWorkspace(allWorkspaces[0]);
     setCurrentWorkspace();
   }
  }
@@ -162,11 +163,12 @@ function addNewWorkspace() {
 
 
   prompts = Services.prompt;
-  var check = {value: false};
-  var input = {placeHolder: "Workspace Name"};
-  let result = prompts.prompt(null, l10n.formatValueSync("workspace-prompt-title"), l10n.formatValueSync("please-enter-workspace-name"), input, null, check);
+  let check = {value: false};
+  let pattern = /^[a-zA-Z0-9]+$/;
+  let input = {value: ""};
+  let result = prompts.prompt(null, l10n.formatValueSync("workspace-prompt-title"), l10n.formatValueSync("please-enter-workspace-name") + "\n" + l10n.formatValueSync("please-enter-workspace-name-2"), input, null, check);
 
-  if (result && allWorkspace.indexOf(input.value) == -1 && input.value != "" && input.value.length < 20) {
+  if (result && allWorkspace.indexOf(input.value) == -1 && input.value != "" && input.value.length < 20 && input.value != l10n.formatValueSync("workspace-default") && pattern.test(input.value)) {
     let label = input.value;
     let workspaceAll = Services.prefs.getStringPref(WORKSPACE_ALL_PREF).split(",");
     try {

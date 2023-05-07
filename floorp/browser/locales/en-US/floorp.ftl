@@ -719,6 +719,7 @@ floorp-show-all-downloads =
 
 workspace-prompt-title = Floorp Workspace
 please-enter-workspace-name = Please enter new workspace name.
+please-enter-workspace-name-2 = Only alphabetic and numeric workspace are allowed.
 workspace-error = ERROR!
 workspace-error-discription = Workspace name is invalid or already exists.
 
