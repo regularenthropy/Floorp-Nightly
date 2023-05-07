@@ -432,7 +432,7 @@ restore-button = Restore
 ## user.js
 header-userjs = user.js
 userjs-customize = Customize { -brand-short-name } with user.js
-about-userjs-customize = user.js is a configuration file that allows you to customize { -brand-short-name }. user.js will download from the Internet and overwrite the original user.js file. Please back up the original user.js file before using it. config will be applied after restarting { -brand-short-name }.
+about-userjs-customize = user.js is a configuration file that allows you to customize { -brand-short-name }. user.js will download from the Internet and overwrite the original user.js file. Please back up the original user.js file before using it. Сonfig will be applied after restarting { -brand-short-name }.
 
 userjs-label = user.js list
 userjs-prompt = Floorp user.js
