@@ -340,7 +340,7 @@
 
 :root[privatebrowsingmode] #fxa-toolbar-menu-button {
   display: inherit !important;
-  background: var(--panel-separator-zap-gradient);
+  background: linear-gradient(90deg, #9059FF 0%, #FF4AA2 52.08%, #FFBD4F 100%);
   margin: auto;
   color: var(--toolbar-bgcolor) !important;
   fill: currentColor !important;

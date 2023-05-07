@@ -7,8 +7,12 @@
    --main-content-padding-to-sidebar: 2vw;
    font: message-box;
    appearance: none;
-   background-color: var(--in-content-page-background);
-   color: var(--in-content-page-color);
+   background-color: var(--in-content-box-background-odd) !important;
+   color: var(--in-content-page-color) !important;
+ }
+
+ button {
+  background-color: var(--in-content-box-info-background) !important;
  }
  
  #header {
@@ -33,6 +37,7 @@
    display: inherit;
    width: 18em;
    margin-bottom: 2vw;
+   background: var(--in-content-box-background-odd);
  }
  
  #memo-contents {
@@ -62,6 +67,7 @@
    resize: none;
    max-width: 100%;
    width: 100%;
+   background: var(--in-content-box-background-odd);
  }
  
  #memo-list {
@@ -145,7 +151,7 @@
    display: block;
    border: solid 1px gray;
    box-shadow: 0 1px 4px var(--grey-90-a10);
-   background: var(--in-content-button-background);
+   background: var(--in-content-box-background-odd);
    border: 1px solid transparent;
    border-radius: 4px;
    box-shadow: var(--card-shadow);

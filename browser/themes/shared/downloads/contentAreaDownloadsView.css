@@ -25,3 +25,40 @@
   text-align: center;
   color: var(--in-content-deemphasized-text);
 }
+
+.downloadMainArea{
+  width: 85%;
+  overflow: hidden;
+}
+
+#downloadsListBox {
+  border: none;
+  border-radius: 0;
+  background: none;
+}
+
+#downloadsListBox > richlistitem {
+  border-radius: 4px;
+  margin-bottom: 8px;
+}
+
+#downloadsListBox > richlistitem:not([selected]):hover {
+  background-color: var(--in-content-box-background);
+}
+
+#downloadsListBox > richlistitem {
+  border-radius: 0 !important;
+  border-bottom: 1px solid var(--card-outline-color);
+  margin: 0 !important;
+}
+
+#contentAreaDownloadsView {
+  background-color: var(--in-content-box-background-odd);
+  padding: 0 !important;
+}
+
+@media (prefers-reduced-motion) {
+  #downloadsListBox > richlistitem {
+    transition: none;
+  }
+}
