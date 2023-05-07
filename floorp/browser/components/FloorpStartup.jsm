@@ -192,7 +192,7 @@ if (isMainBrowser) {
             "floorp.browser.sidebar.useIconProvider",
             isChina ?
                 "yandex" : // Setup for China
-                "duckduckgo"
+                "google"
         );
 }
 
