@@ -164,7 +164,7 @@ function addNewWorkspace() {
 
   prompts = Services.prompt;
   let check = {value: false};
-  let pattern = /^[a-zA-Z0-9]+$/;
+  let pattern = /^[\p{L}\p{N}]+$/u;
   let input = {value: ""};
   let result = prompts.prompt(null, l10n.formatValueSync("workspace-prompt-title"), l10n.formatValueSync("please-enter-workspace-name") + "\n" + l10n.formatValueSync("please-enter-workspace-name-2"), input, null, check);
 
