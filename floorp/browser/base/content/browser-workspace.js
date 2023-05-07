@@ -42,6 +42,14 @@ function deleteworkspace(workspace) {
  if  (workspace !== defaultWorkspaceName) {
   let allWorkspaces = Services.prefs.getCharPref(WORKSPACE_ALL_PREF).split(",");
   let index = allWorkspaces.indexOf(workspace);
+  let currentWorkspace = Services.prefs.getStringPref(WORKSPACE_CURRENT_PREF);
+
+  //move to other workspace
+  if (currentWorkspace == workspace) {
+    changeWorkspace(allWorkspaces[0]);
+    Services.prefs.setStringPref(WORKSPACE_CURRENT_PREF, defaultWorkspaceName);
+    setCurrentWorkspace();
+  }
   allWorkspaces.splice(index, 1);
   Services.prefs.setCharPref(WORKSPACE_ALL_PREF, allWorkspaces.join(","));
 
@@ -57,14 +65,6 @@ function deleteworkspace(workspace) {
   //delete workspace menuitem
   let menuitem = document.querySelector(`#workspace-${workspace}`);
   menuitem.remove();
-  
-  //move to other workspace
-  let currentWorkspace = Services.prefs.getStringPref(WORKSPACE_CURRENT_PREF);
-  if (currentWorkspace == workspace) {
-    Services.prefs.setStringPref(WORKSPACE_CURRENT_PREF, allWorkspaces[0]);
-    changeWorkspace(allWorkspaces[0]);
-    setCurrentWorkspace();
-  }
  }
 }
 
