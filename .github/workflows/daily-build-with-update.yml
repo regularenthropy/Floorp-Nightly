@@ -344,11 +344,19 @@ jobs:
 
     - name: Delete BETA tag & release 🗑️
       continue-on-error: true
+      id: delete_tag_release_execution
       env:
         GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       run: |
          git pull --tags -f
          gh release delete BETA -y
+         git push --delete -f origin BETA
+         git tag -d BETA
+
+    - name: Error handling
+      continue-on-error: true
+      if: ${{ steps.delete_tag_release_execution.outcome == 'failure' }}
+      run: |
          git push --delete -f origin BETA
          git tag -d BETA
 
