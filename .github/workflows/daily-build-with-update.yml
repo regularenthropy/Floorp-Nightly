@@ -1,4 +1,4 @@
-name: Daily Build with Enable Update on Windows
+name: Daily Build with Update
 
 on:
   workflow_dispatch:
@@ -81,6 +81,11 @@ jobs:
 
     - uses: actions/checkout@v3
       name: Clone 🧬
+    
+    - name: Set Display Version
+      run: |
+        export DATE=date +"%Y%m%d"
+        echo $DATE > browser/config/version_display.txt
 
     - name: Setup 🪛
       run: |
@@ -117,11 +122,6 @@ jobs:
         export UPDATE_CHANNEL="release"
         echo "DISPLAY_VERSION=$DISPLAY_VERSION" >> $GITHUB_ENV
         echo "UPDATE_CHANNEL=$UPDATE_CHANNEL" >> $GITHUB_ENV
-
-    - name: Set Display Version
-      run: |
-        export DATE=`date +"%Y%m%d"`
-        echo $DATE > browser/config/version_display.txt
 
     - name: Change update url
       run: |
@@ -276,7 +276,12 @@ jobs:
     - name: Clone l10n-central 🧬
       run: |
         git clone --depth 1 https://github.com/Floorp-Projects/l10n-central.git $RUNNER_USERDIR/l10n-central
-
+       
+    - name: Set Display Version
+      run: |
+        export DATE=date +"%Y%m%d"
+        echo $DATE > browser/config/version_display.txt
+  
     - name: Setup 🪛
       run: |
         mkdir -p $RUNNER_USERDIR/win-cross
@@ -315,10 +320,6 @@ jobs:
         export UPDATE_CHANNEL="release"
         echo "DISPLAY_VERSION=$DISPLAY_VERSION" >> $GITHUB_ENV
         echo "UPDATE_CHANNEL=$UPDATE_CHANNEL" >> $GITHUB_ENV
-
-    - name: Set Display Version
-      run: |
-        echo ${{ github.sha }} > browser/config/version_display.txt
 
     - name: Change update url
       run: |
@@ -397,7 +398,19 @@ jobs:
       run: |
          git tag BETA
          git push -f origin BETA
-         gh release create BETA $RUNNER_USERDIR/output/update.xml $RUNNER_USERDIR/output/update.mar $RUNNER_USERDIR/output/floorp-win64.zip $RUNNER_USERDIR/output/floorp-win64.installer.exe -p
+
+    - name: Create Release
+      uses: "marvinpinto/action-automatic-releases@latest"
+      with:
+        repo_token: ${{ secrets.GITHUB_TOKEN }}
+        automatic_release_tag: BETA
+        prerelease: true
+        title: "Floorp ${floorp_disp_ver} Beta"
+        files: |
+          $RUNNER_USERDIR/output/update.xml
+          $RUNNER_USERDIR/output/update.mar
+          $RUNNER_USERDIR/output/floorp-win64.zip
+          $RUNNER_USERDIR/output/floorp-win64.installer.exe
 
     - name: Publish 🎁
       uses: actions/upload-artifact@master
@@ -415,143 +428,3 @@ jobs:
         rm -rf $RUNNER_USERDIR/l10n-central
         rm -rf $GITHUB_WORKSPACE
         mkdir $GITHUB_WORKSPACE
-
-  linux-x86-64-build:
-    if: (github.event_name == 'schedule' && github.repository_owner == 'Floorp-Projects') || (github.event_name != 'schedule')
-    name: Linux x86_64 Build
-    runs-on: ubuntu-22.04
-    steps:
-    - name: Init
-      run: |
-        export RUNNER_USERDIR=`echo ~`
-        echo "RUNNER_USERDIR=$RUNNER_USERDIR" >> $GITHUB_ENV
-
-    - name: Change PPA mirror servers
-      run: |
-        sudo perl -p -i -e 's%(deb(?:-src|)\s+)https?://(?!archive\.canonical\.com|security\.ubuntu\.com)[^\s]+%$1http://archive.ubuntu.com/ubuntu/%' /etc/apt/sources.list
-        sudo apt update
-
-    - name: Setup Disk & Swap Space 💿
-      run: |
-        echo Before:
-        free -h
-        df -h
-
-        echo
-        echo
-
-        sudo swapoff /mnt/swapfile
-        sudo rm /mnt/swapfile
-        sudo fallocate -l 10G /mnt/swapfile
-        sudo chmod 600 /mnt/swapfile
-        sudo mkswap /mnt/swapfile
-        sudo swapon /mnt/swapfile
-
-        sudo apt remove -y '^dotnet-.*' '^llvm-.*' '^php.*' '^mongodb-.*' '^mysql-.*' azure-cli google-cloud-sdk google-chrome-stable firefox powershell mono-devel libgl1-mesa-dri
-        sudo apt autoremove -y
-        sudo rm -rf /usr/share/dotnet
-        sudo rm -rf /usr/local/lib/android
-        sudo rm -rf /opt/ghc
-
-        sudo fallocate -l 10G /home/runner/swapfile2
-        sudo chmod 600 /home/runner/swapfile2
-        sudo mkswap /home/runner/swapfile2
-        sudo swapon /home/runner/swapfile2
-
-        echo
-        echo
-
-        echo After:
-        free -h
-        df -h
-
-    - uses: actions/checkout@v3
-      name: Clone 🧬
-
-    - name: Clone l10n-central 🧬
-      run: |
-        git clone --depth 1 https://github.com/Floorp-Projects/l10n-central.git $RUNNER_USERDIR/l10n-central
-
-    - name: Setup 🪛
-      run: |
-        sudo apt update
-        sudo apt install xvfb
-        mozconfig_file=(
-        'ac_add_options --with-app-name=floorp'
-        'ac_add_options --with-app-basename=Floorp'
-        'ac_add_options --with-branding=browser/branding/beta'
-        'ac_add_options --disable-crashreporter'
-        'ac_add_options --disable-updater'
-        'ac_add_options --enable-proxy-bypass-protection'
-        'ac_add_options --enable-unverified-updates'
-        'ac_add_options --enable-optimize="-O2"'
-        'ac_add_options --disable-tests'
-        'ac_add_options --enable-rust-simd'
-        'ac_add_options --enable-release'
-        'ac_add_options RUSTC_OPT_LEVEL=3'
-        'ac_add_options --enable-lto'
-        'ac_add_options MOZ_PGO=1'
-        'MOZ_REQUIRE_SIGNING='
-        'MOZ_DATA_REPORTING='
-        'MOZ_TELEMETRY_REPORTING='
-        'ac_add_options --enable-bootstrap'
-        'ac_add_options --with-l10n-base=$RUNNER_USERDIR/l10n-central/l10n-central'
-        'ac_add_options --with-mozilla-api-keyfile=$PWD/floorp/apis/api-mozilla-key'
-        'ac_add_options --with-google-location-service-api-keyfile=$PWD/floorp/apis/api-google-location-service-key'
-        'ac_add_options --with-google-safebrowsing-api-keyfile=$PWD/floorp/apis/api-google-safe-browsing-key'
-        )
-        for line in "${mozconfig_file[@]}" ; do echo $line >> mozconfig ; done
-        ./mach --no-interactive bootstrap --application-choice browser
-        export DISPLAY_VERSION=`cat browser/config/version_display.txt`
-
-    - name: Set Display Version
-      run: |
-        echo ${{ github.sha }} > browser/config/version_display.txt
-
-    - name: Change update url
-      run: |
-        sed -i 's/^URL=https:\/\/@MOZ_APPUPDATE_HOST@\/browser\/%DISPLAY_VERSION%/URL=https:\/\/@MOZ_APPUPDATE_HOST@\/browser\/beta/' ./build/application.ini.in
-
-    - name: Copy l10n files
-      run: |
-        for dir in $(ls -l $RUNNER_USERDIR/l10n-central/l10n-central | grep ^d | awk '{print $9}'); do
-          mkdir -p $RUNNER_USERDIR/l10n-central/l10n-central/$dir/browser/branding/beta
-          cp ./browser/branding/beta/locales/en-US/brand.dtd $RUNNER_USERDIR/l10n-central/l10n-central/$dir/browser/branding/beta/brand.dtd
-          cp ./browser/branding/beta/locales/en-US/brand.ftl $RUNNER_USERDIR/l10n-central/l10n-central/$dir/browser/branding/beta/brand.ftl
-          cp ./browser/branding/beta/locales/en-US/brand.properties $RUNNER_USERDIR/l10n-central/l10n-central/$dir/browser/branding/beta/brand.properties
-        done
-
-    - name: Build 🔨
-      run: |
-        Xvfb :2 -screen 0 1024x768x24 &
-        export DISPLAY=:2
-        ./mach build
-
-    - name: Package 📦
-      run: |
-        ./mach package
-        ./mach package-multi-locale --locales ar cs da de el en-GB en-US es-ES es-MX fr hu id it ja ja-KA ko lt nl nn-NO pl pt-BR pt-PT ru sv-SE th vi zh-CN zh-TW
-
-    - name: Copy 📂
-      run: |
-        mkdir $RUNNER_USERDIR/output
-        cp obj-x86_64-pc-linux-gnu/dist/*.tar.bz2 $RUNNER_USERDIR/output/
-
-    - name: Publish 🎁
-      uses: actions/upload-artifact@master
-      with:
-        name: floorp-linux-x86_64-devel
-        path: ${{ env.RUNNER_USERDIR }}/output
-
-  cleanup:
-    if: (github.event_name == 'schedule' && github.repository_owner == 'Floorp-Projects') || (github.event_name != 'schedule')
-    name: Clean Up
-    needs: [windows-x86-64-build-with-profdata-and-jarlog, linux-x86-64-build]
-    runs-on: ubuntu-22.04
-    steps:
-    - uses: GeekyEggo/delete-artifact@v2.0.0
-      name: Delete unwanted artifacts
-      with:
-        name: |
-          floorp-windows-x86_64-devel-build-with-enable-profile-generate
-          floorp-windows-x86_64-devel-profdata-and-jarlog
