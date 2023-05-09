@@ -63,6 +63,7 @@ if (Services.prefs.getBoolPref("floorp.browser.native.downloadbar.enabled", true
     }
     #downloadsPanel {
       margin: 0 !important;
+      background-color: var(--toolbar-bgcolor) !important;
     }
     #downloads-button {
       display: none !important;
