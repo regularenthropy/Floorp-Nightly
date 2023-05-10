@@ -132,6 +132,14 @@ window.addEventListener("pageshow", async function() {
     window.location.href = "about:preferences#userjs";
   });
 
+  const addonStatus = async (addonID, idName) => {
+    const addon = await AddonManager.getAddonByID(addonID);
+    if (addon !== null) {
+      document.getElementById(idName).style.display = "none";
+    }
+  };
+  addonStatus("{506e023c-7f2b-40a3-8066-bc5deb40aebe}", "aboutMouseGesture");
+
   Services.prefs.addObserver("toolkit.tabbox.switchByScrolling", function() {
     let isEnabled = Services.prefs.getBoolPref("toolkit.tabbox.switchByScrolling");
     let tabscrollReverse = document.querySelector('[preference="floorp.tabscroll.reverse"]');

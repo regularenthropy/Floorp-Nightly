@@ -137,20 +137,6 @@ NOTE: You can use the userContent.css file without change preferences (about:con
     
     const quitterInstalled = Boolean(await AddonManager.getAddonByID("quitter@mozilla.org"));
 
-    if (isFirstRun && !quitterInstalled) {
-        try {
-            let url = "https://addons.mozilla.org/firefox/downloads/latest/Gesturefy/latest.xpi";
-            let install = await AddonManager.getInstallForURL(url);
-            await install.install();
-        } catch (e) { console.error(e) }
-        try {
-            let url = "https://addons.mozilla.org/firefox/downloads/latest/ublock-origin/latest.xpi";
-            let install = await AddonManager.getInstallForURL(url);
-            let installed = await install.install();
-            await installed.disable(); // Default is disabled.
-        } catch (e) { console.error(e) }
-    }
-
     if(isUpdated && Services.prefs.getBoolPref("floorp.enable.multitab")){
         Services.prefs.setBoolPref("floorp.tabbar.style",1)
         Services.prefs.deleteBranch("floorp.tabbar.style")

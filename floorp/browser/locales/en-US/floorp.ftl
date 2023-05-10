@@ -461,15 +461,20 @@ Peskyfox-label = Yokoffing Peskyfox
 about-Peskyfox = Unclutter the new tab page. Remove Pocket. Restore compact mode as an option. Stop webpage notifications, pop-ups, and other annoyances.
 
 Smoothfox-label = Yokoffing Smoothfox
-about-Smoothfox = Get Edge-like smooth scrolling on your favorite browser — or choose something more your style.
+about-Smoothfox = Get Edge-like smooth scrolling on your favorite browser — or choose something more your style. 
+
+## Mouse Gesture
+mouse-gesture = Mouse Gesture
+mouse-gesture-description = Gesturefy must be installed to use mouse gestures with { -brand-short-name }.
+Gesturefy = Gesturefy
+about-Gesturefy = Gesturefy is an extension that adds mouse gestures to your browser; if { -brand-short-name } detects the installation of this add-on, it will add gesture commands to Gesturefy that are only available in { -brand-short-name }. Also, this add-on can work with new tabs!
 
 # Privacy Hub
-
 ## BlockMoreTracker
 privacy-hub-header = Privacy Hub
 block-more-tracker = Block more Ads and Trackers
 block-tracker = This section contains a set of extensions designed to block ads and trackers
-view-at-AMO = View at AMO
+view-at-AMO = View this addon in addons.mozilla.org
 uBlock-Origin = uBlock Origin
 about-uboori = uBlock Origin blocks ads, extensive trackers, and additional dangerous sites.
 Facebook-Container = Facebook Container
