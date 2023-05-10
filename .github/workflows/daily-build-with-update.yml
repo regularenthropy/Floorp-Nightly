@@ -410,12 +410,12 @@ jobs:
         repo_token: ${{ secrets.GITHUB_TOKEN }}
         automatic_release_tag: BETA
         prerelease: true
-        title: "Floorp ${floorp_disp_ver} Beta"
+        title: "Floorp development build DATE: $(date +'%Y-%m-%d %H:%M:%S')"
         files: |
-          $RUNNER_USERDIR/output/update.xml
-          $RUNNER_USERDIR/output/update.mar
-          $RUNNER_USERDIR/output/floorp-win64.zip
-          $RUNNER_USERDIR/output/floorp-win64.installer.exe
+          ${{ env.RUNNER_USERDIR }}/output/update.xml
+          ${{ env.RUNNER_USERDIR }}/output/update.mar
+          ${{ env.RUNNER_USERDIR }}/output/floorp-win64.zip
+          ${{ env.RUNNER_USERDIR }}/output/floorp-win64.installer.exe
 
     - name: Publish 🎁
       uses: actions/upload-artifact@master
