@@ -340,6 +340,10 @@ window.setTimeout(function(){
     setCurrentWorkspace();
   }, false);
 
+  gBrowser.tabContainer.addEventListener("TabSelect", function() {
+    setCurrentWorkspace();
+  }, false);
+
   Services.prefs.addObserver(WORKSPACE_TAB_ENABLED_PREF,function(){
     document.querySelector("#workspace-button").style.display = Services.prefs.getBoolPref(WORKSPACE_TAB_ENABLED_PREF) ? "" : "none"    
     if(!Services.prefs.getBoolPref(WORKSPACE_TAB_ENABLED_PREF)){
