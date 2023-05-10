@@ -404,13 +404,16 @@ jobs:
          git tag BETA
          git push -f origin BETA
 
+    - name: Get a current date 
+      run: echo "NOW=$(date +'%Y-%m-%dT%H:%M:%S')" >> $GITHUB_ENV
+
     - name: Create Release
       uses: "marvinpinto/action-automatic-releases@latest"
       with:
         repo_token: ${{ secrets.GITHUB_TOKEN }}
         automatic_release_tag: BETA
         prerelease: true
-        title: "Floorp development build DATE: $(date +'%Y-%m-%d %H:%M:%S')"
+        title: "Floorp development build DATE: ${{ env.NOW }}"
         files: |
           ${{ env.RUNNER_USERDIR }}/output/update.xml
           ${{ env.RUNNER_USERDIR }}/output/update.mar
