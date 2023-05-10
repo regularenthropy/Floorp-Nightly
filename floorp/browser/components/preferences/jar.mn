@@ -4,6 +4,7 @@
 
 browser.jar:
    content/browser/preferences/floorp-main.js
+   content/browser/preferences/floorp-privacy.js
    content/browser/preferences/lepton.js
    content/browser/preferences/bsb.js
    content/browser/preferences/design.js

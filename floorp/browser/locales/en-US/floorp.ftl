@@ -463,6 +463,37 @@ about-Peskyfox = Unclutter the new tab page. Remove Pocket. Restore compact mode
 Smoothfox-label = Yokoffing Smoothfox
 about-Smoothfox = Get Edge-like smooth scrolling on your favorite browser — or choose something more your style.
 
+# Privacy Hub
+
+## BlockMoreTracker
+privacy-hub-header = Privacy Hub
+block-more-tracker = Block more Ads and Trackers
+block-tracker = This section contains a set of extensions designed to block ads and trackers
+view-at-AMO = View at AMO
+uBlock-Origin = uBlock Origin
+about-uboori = uBlock Origin blocks ads, extensive trackers, and additional dangerous sites.
+Facebook-Container = Facebook Container
+about-Facebook-Container = Prevent Facebook from tracking you around the web. The Facebook Container extension for Firefox helps you take control and isolate your web activity from Facebook.
+
+## Fingerprint
+fingerprint-header = Resist Fingerprinting & IP address leak
+block-fingerprint = Fingerprinting is a tracking mechanism that relies on the unique features of your browser and operating system. This section contains settings to further enhance this protection beyond the default blocking.
+enable-firefox-fingerprint-protections = Enable strong protection against fingerprinting
+about-firefox-fingerprint-protection = Enabling protection by Firefox includes forced light mode, disabling some APIs, etc. Some sites may be broken.
+fingerprint-Protection =
+ .label =  Anti-fingerprinting protections
+html5-canvas-prompt-settings =
+ .label =  Automatically approve access confirmation prompts for HTML5 image data
+canvas-prompt = Automatically reject the canvas-reading prompt
+disable-webgl =
+ .label =  Disable WebGL
+about-webgl = WebGL is a Javascript API used to render graphics, which can be used to identify GPU.
+Canvas-Blocker = Canvas Blocker
+about-CB = This add-on spoofs data used by fingerprinting techniques.
+WebRTC-connection = WebRTC is a standard that provides real-time calling. If you disable this setting, you will not be able to use Discord, etc.
+WebRTC = 
+ .label = Enable WebRTC Connection
+
 ################################################################### browser ###############################################################
 
 rest-mode = Taking a break...

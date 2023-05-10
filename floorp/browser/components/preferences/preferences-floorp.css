@@ -679,3 +679,38 @@
     margin-bottom: auto;
     width: 15%;
   }
+
+  .ContentBlockBox {
+    padding: 12px 16px;
+    background: var(--card-background) !important;
+    box-shadow: var(--card-shadow) !important;
+    border-radius: 4px !important;
+    border: 0 !important;
+    margin: 10px 0px;
+  }
+
+  .AMO-Link {
+    text-align: end;
+    margin-top: auto;
+  }
+
+  .addonRecommend-box {
+    display: flex;
+  }
+
+  .addonRecommend-img {
+    width: 64px;
+    height: 64px;
+    background-position: center center !important;
+    background-repeat: no-repeat !important;
+    background-size: contain;
+    margin-inline-end: 15px;
+  }
+
+  .addonRecommend-header {
+    margin-top: 0;
+  }
+
+  .addonRecommend-label-box {
+    width: -moz-available;
+  }
