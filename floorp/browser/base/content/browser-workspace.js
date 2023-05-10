@@ -157,6 +157,19 @@ function changeWorkspace(label) {
   saveWorkspaceState();
 }
 
+function getNextToWorkspaceTab() {
+  let tabs = gBrowser.tabs;
+  let nextTab = null;
+  for (let i = 0; i < tabs.length; i++) {
+    let tab = tabs[i];
+    if (tab.getAttribute("floorp-workspace") == gBrowser.selectedTab.getAttribute("floorp-workspace") && tab != gBrowser.selectedTab) {
+      nextTab = tab;
+      break;
+    }
+  }
+  return nextTab;
+}
+
 function addNewWorkspace() {
   let allWorkspace = Services.prefs.getStringPref(WORKSPACE_ALL_PREF).split(",");
   let l10n = new Localization(["browser/floorp.ftl"], true);
@@ -216,14 +229,15 @@ function CreateWorkspaceContextMenu(){
   }
 
   //Rebuild context menu
-  if(TabContextMenu.contextTab == gBrowser.selectedTab){
+  if(getNextToWorkspaceTab() == null){
     let menuItem = window.MozXULElement.parseXULToFragment(`
-      <menuitem data-l10n-id="workspace-context-menu-selected-tab" disabled="true"/>
+     <menuitem data-l10n-id="workspace-context-menu-selected-tab" disabled="true"/>
     `)
     let parentElem = document.getElementById("workspaceTabContextMenu");
     parentElem.appendChild(menuItem);
     return;
   }
+
   let workspaceAll = Services.prefs.getStringPref(WORKSPACE_ALL_PREF).split(",");
   for(let i = 0; i < workspaceAll.length; i++){
     let workspace = workspaceAll[i]
@@ -239,9 +253,11 @@ function CreateWorkspaceContextMenu(){
 }
 
 function moveTabToOtherWorkspace(tab, workspace){
-  if(gBrowser.tabs.selectedTab == tab){
-    gBrowser.selectedTab = gBrowser.tabs[gBrowser.tabs.length - 1];
+  //checkTabisCurrentTab
+  if(tab == gBrowser.selectedTab && getNextToWorkspaceTab() != null){
+    gBrowser.selectedTab = getNextToWorkspaceTab();
   }
+
   let willMoveWorkspace = workspace;
   tab.setAttribute("floorp-workspace", willMoveWorkspace);
   saveWorkspaceState();
