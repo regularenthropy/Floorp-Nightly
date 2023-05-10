@@ -247,9 +247,6 @@ bsb-download-sidebar =
 bsb-notes-sidebar =
   .label = { sidebar2-notes-sidebar }
 
-bsb-TST-sidebar =
-  .label = { sidebar2-TST-sidebar }
-
 bsb-website = 
   .label = Website
 
@@ -563,11 +560,6 @@ sidebar2-notes-sidebar = Notes
 show-notes-sidebar =
   .tooltiptext = Show { sidebar2-notes-sidebar } Sidebar
 
-sidebar2-TST-sidebar = Tree Style Tab
-
-show-TST-sidebar =
-  .tooltiptext = Show { sidebar2-TST-sidebar } Sidebar
-
 sidebar-add-button =
   .tooltiptext = { bsb-add }
 
@@ -639,12 +631,6 @@ undo-closed-tab = Undo close Tab
 dual-theme-enable-addon-button = Enable as a sub theme
 dual-theme-disable-addon-button = Disable as a sub theme
 dual-theme-enabled-heading = Enabled as a sub theme
-
-##################################################################### migration  ###############################################################
-
-import-from-vivaldi =
-    .label = Vivaldi
-    .accesskey = V
 
 ##################################################################### toolbar ###############################################################
 
