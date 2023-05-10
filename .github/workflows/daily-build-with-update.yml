@@ -405,17 +405,26 @@ jobs:
          git push -f origin BETA
 
     - name: Create Release
-      uses: "marvinpinto/action-automatic-releases@latest"
+      uses: actions/create-release@v1
       with:
-        repo_token: ${{ secrets.GITHUB_TOKEN }}
-        automatic_release_tag: BETA
+        tag_name: BETA
+        release_name: BETA v${{ env.VERSION }}
+        body: |
+           This is a BETA release of Floorp & is not recommended for daily use.
+           This release is for testing purposes only.
+           If you found any bugs, please report them to us.
+        draft: false
         prerelease: true
-        title: "Floorp ${floorp_disp_ver} Beta"
-        files: |
-          $RUNNER_USERDIR/output/update.xml
-          $RUNNER_USERDIR/output/update.mar
-          $RUNNER_USERDIR/output/floorp-win64.zip
-          $RUNNER_USERDIR/output/floorp-win64.installer.exe
+
+    - name: Upload 📤
+      uses: actions/upload-release-asset@v1
+      with:
+        upload_url: ${{ steps.create_release.outputs.upload_url }}
+        asset_path: |
+          ${{ env.RUNNER_USERDIR }}/output/floorp-win64.installer.exe
+          ${{ env.RUNNER_USERDIR }}/output/floorp-win64.zip
+          ${{ env.RUNNER_USERDIR }}/output/update.mar
+          ${{ env.RUNNER_USERDIR }}/output/update.xml
 
     - name: Publish 🎁
       uses: actions/upload-artifact@master
