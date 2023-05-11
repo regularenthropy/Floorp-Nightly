@@ -135,28 +135,10 @@ NOTE: You can use the userContent.css file without change preferences (about:con
         }
     });
     
-    const quitterInstalled = Boolean(await AddonManager.getAddonByID("quitter@mozilla.org"));
-
     if(isUpdated && Services.prefs.getBoolPref("floorp.enable.multitab")){
         Services.prefs.setBoolPref("floorp.tabbar.style",1)
         Services.prefs.deleteBranch("floorp.tabbar.style")
     } 
-
-    try {
-        if (
-            !quitterInstalled &&
-            !Services.prefs.getBoolPref("floorp.extensions.translate.migrateFromSystemAddonToUserAddon.ended", false)
-        ) {
-            let addon = await AddonManager.getAddonByID("{036a55b4-5e72-4d05-a06c-cba2dfcc134a}");
-            if (addon === null || addon.version === "1.0.0") {
-                let url = "https://addons.mozilla.org/firefox/downloads/latest/traduzir-paginas-web/latest.xpi";
-                let install = await AddonManager.getInstallForURL(url);
-                let installed = await install.install();
-                await installed.reload(); // Do not show addon release note.
-            }
-            Services.prefs.setBoolPref("floorp.extensions.translate.migrateFromSystemAddonToUserAddon.ended", true);
-        }
-    } catch (e) { console.error(e) }
 
     if (isFirstRun) {
         setTimeout(() => {
