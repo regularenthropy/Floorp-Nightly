@@ -41,7 +41,7 @@ class LinkHandlerParent extends JSWindowActorParent {
 
         if (aMsg.data.canUseForTab) {
           let tab = gBrowser.getTabForBrowser(browser);
-          if (tab.hasAttribute("busy")) {
+          if (tab?.hasAttribute("busy")) {
             tab.setAttribute("pendingicon", "true");
           }
         }
