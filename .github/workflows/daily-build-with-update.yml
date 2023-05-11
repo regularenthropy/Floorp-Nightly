@@ -405,7 +405,7 @@ jobs:
          git push -f origin BETA
 
     - name: Get a current date 
-      run: echo "NOW=$(date +'%Y-%m-%dT%H:%M:%S')" >> $GITHUB_ENV
+      run: echo "NOW=$(date +'%Y-%m-%d %H:%M:%S')" >> $GITHUB_ENV
 
     - name: Create Release
       uses: "marvinpinto/action-automatic-releases@latest"
