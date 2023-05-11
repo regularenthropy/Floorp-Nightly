@@ -384,7 +384,7 @@ jobs:
         echo "<?xml version=\"1.0\" encoding=\"UTF-8\"?>" >> obj-x86_64-pc-mingw32/dist/update.xml
         echo "<updates>" >> obj-x86_64-pc-mingw32/dist/update.xml
         echo "    <update type=\"minor\" displayVersion=\"${floorp_disp_ver}\" appVersion=\"${floorp_ver}\" platformVersion=\"${floorp_ver}\" buildID=\"${floorp_build_id}\" detailsURL=\"https://blog.ablaze.one/category/ablaze/ablaze-project/floorp/\">" >> obj-x86_64-pc-mingw32/dist/update.xml
-        echo "        <patch type=\"complete\" URL=\"https://github.com/Floorp-Projects/Floorp/releases/download/v${floorp_disp_ver}/${floorp_disp_ver}-WINNT.mar\" size=\"${floorp_mar_size}\"/>" >> obj-x86_64-pc-mingw32/dist/update.xml
+        echo "        <patch type=\"complete\" URL=\"https://github.com/Floorp-Projects/Floorp-Nightly/releases/download/BETA/update.mar\" size=\"${floorp_mar_size}\"/>" >> obj-x86_64-pc-mingw32/dist/update.xml
         echo "    </update>" >> obj-x86_64-pc-mingw32/dist/update.xml
         echo "</updates>" >> obj-x86_64-pc-mingw32/dist/update.xml
 
