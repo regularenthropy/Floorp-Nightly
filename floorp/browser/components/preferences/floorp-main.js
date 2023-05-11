@@ -55,11 +55,6 @@ window.addEventListener("pageshow", async function() {
     });
   }
 
-  document.getElementById("translateoption").addEventListener("click", async function opentranslateroption() {
-    const addon = await AddonManager.getAddonByID("{036a55b4-5e72-4d05-a06c-cba2dfcc134a}");
-    await window.open(addon.optionsURL, '_blank');
-  });
-
   {
     let prefName = "floorp.browser.sidebar2.global.webpanel.width";
     let elem = document.getElementById("GlobalWidth");
@@ -139,6 +134,7 @@ window.addEventListener("pageshow", async function() {
     }
   };
   addonStatus("{506e023c-7f2b-40a3-8066-bc5deb40aebe}", "aboutMouseGesture");
+  addonStatus("{036a55b4-5e72-4d05-a06c-cba2dfcc134a}", "TWS-box");
 
   Services.prefs.addObserver("toolkit.tabbox.switchByScrolling", function() {
     let isEnabled = Services.prefs.getBoolPref("toolkit.tabbox.switchByScrolling");

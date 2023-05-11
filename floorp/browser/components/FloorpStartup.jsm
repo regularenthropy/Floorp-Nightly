@@ -15,9 +15,6 @@ const { Services } = ChromeUtils.import(
 const { AppConstants } = ChromeUtils.import(
     "resource://gre/modules/AppConstants.jsm"
 );
-const { AddonManager } = ChromeUtils.import(
-    "resource://gre/modules/AddonManager.jsm"
-);
 const { OS } = ChromeUtils.import(
     "resource://gre/modules/osfile.jsm"
 );

@@ -285,11 +285,17 @@
   <checkbox id="checkSpelling"
           data-l10n-id="check-user-spelling"
           preference="layout.spellcheckDefault"/>
-  <hbox>
-  <description flex="1" data-l10n-id="floorp-translater"/>
-  <button  data-l10n-id="click-to-option" is="highlightable-button" 
-    class="accessory-button" id="translateoption"/>
-  </hbox>
+
+  <vbox id="TWS-box" class="TWS ContentBlockBox">
+    <html:h3 class="TWS addonRecommend-header" data-l10n-id="TWS"/>
+    <hbox class="addonRecommend-box">
+      <image id="TWSImg" class="addonRecommend-img" style="background-image: url('https://addons.mozilla.org/user-media/addon_icons/2623/2623538-64.png');"/>
+      <vbox class="addonRecommend-label-box">
+       <description id="AddonRecommend" data-l10n-id="about-TWS"/>
+       <label class="AMO-Link" is="text-link" href="https://addons.mozilla.org/firefox/addon/traduzir-paginas-web" data-l10n-id="view-at-AMO"></label>
+      </vbox>
+    </hbox>
+  </vbox>
 </groupbox>
 
 <!-- Fonts -->

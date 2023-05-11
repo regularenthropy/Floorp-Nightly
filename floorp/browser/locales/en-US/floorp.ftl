@@ -466,6 +466,11 @@ mouse-gesture-description = Gesturefy must be installed to use mouse gestures wi
 Gesturefy = Gesturefy
 about-Gesturefy = Gesturefy is an extension that adds mouse gestures to your browser; if { -brand-short-name } detects the installation of this add-on, it will add gesture commands to Gesturefy that are only available in { -brand-short-name }. Also, this add-on can work with new tabs!
 
+# Translate
+TWS = Translate Web Page
+about-TWS = Translate your page in real time using Google or Yandex. You can also translate selected text or the entire page. It is not necessary to open new tabs. The text of the web page is sent to Google, Yandex, etc. for translation.
+
+
 # Privacy Hub
 ## BlockMoreTracker
 privacy-hub-header = Privacy Hub
