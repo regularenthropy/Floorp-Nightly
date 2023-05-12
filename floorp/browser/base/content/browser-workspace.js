@@ -1,5 +1,3 @@
-
-
 /* This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
@@ -29,7 +27,7 @@ function initWorkspace() {
         let tabStateSetting = tabsState[i];
         let workspace = tabStateSetting?.[i]?.workspace ?? Services.prefs.getStringPref(WORKSPACE_CURRENT_PREF);
         tabs[i].setAttribute("floorp-workspace", workspace);
-      }
+      }  
     }
     //add workspace menu form pref
     let workspaceAll = Services.prefs.getStringPref(WORKSPACE_ALL_PREF).split(",");
@@ -37,6 +35,9 @@ function initWorkspace() {
       let label = workspaceAll[i];
       addWorkspaceElemToMenu(label);
     }
+
+    //add attribute to tab
+    addLastShowedWorkspaceTab();
 }
 function deleteworkspace(workspace) {
  if  (workspace !== defaultWorkspaceName) {
@@ -136,13 +137,15 @@ function addWorkspaceElemToMenu(label) {
 }
 
 function changeWorkspace(label) {
-  let currentWorkspace = label;
   let tabs = gBrowser.tabs;
 
   Services.prefs.setStringPref(WORKSPACE_CURRENT_PREF, label);
+  if(!checkWorkspaceLastShowedTabAttributeExist(label)){
+    document.querySelector(`[floorp-workspace="${label}"]`)?.setAttribute(`lastShowWorkspaceTab-${label}`, "true");
+  }
   for (let i = 0; i < tabs.length; i++) {
     let tab = tabs[i];
-    if(tab.getAttribute("floorp-workspace") == currentWorkspace){
+    if(tab.getAttribute(`lastShowWorkspaceTab-${label}`) == "true"){
       gBrowser.selectedTab = tab;
       break;
     } else if(i == tabs.length - 1){
@@ -155,6 +158,19 @@ function changeWorkspace(label) {
   }
   setCurrentWorkspace();
   saveWorkspaceState();
+}
+
+function checkWorkspaceLastShowedTabAttributeExist(label) {
+  let tabs = gBrowser.tabs;
+  let exist = false;
+  for (let i = 0; i < tabs.length; i++) {
+    let tab = tabs[i];
+    if (tab.getAttribute(`lastShowWorkspaceTab-${label}`) == "true") {
+      exist = true;
+      break;
+    }
+  }
+  return exist;
 }
 
 function getNextToWorkspaceTab() {
@@ -173,8 +189,6 @@ function getNextToWorkspaceTab() {
 function addNewWorkspace() {
   let allWorkspace = Services.prefs.getStringPref(WORKSPACE_ALL_PREF).split(",");
   let l10n = new Localization(["browser/floorp.ftl"], true);
-
-
   prompts = Services.prompt;
   let check = {value: false};
   let pattern = /^[\p{L}\p{N}]+$/u;
@@ -264,6 +278,14 @@ function moveTabToOtherWorkspace(tab, workspace){
   setCurrentWorkspace();
 }
 
+function addLastShowedWorkspaceTab(){
+    //add lastShowWorkspaceTab
+    let currentTab = gBrowser.selectedTab;
+    let currentWorkspace = Services.prefs.getStringPref(WORKSPACE_CURRENT_PREF);
+
+    document.querySelector(`[lastShowWorkspaceTab-${currentWorkspace}]`)?.removeAttribute(`lastShowWorkspaceTab-${currentWorkspace}`)
+    currentTab.setAttribute(`lastShowWorkspaceTab-${currentWorkspace}`,"true")
+}
 
 window.setTimeout(function(){
   let list = Services.wm.getEnumerator("navigator:browser");
@@ -342,6 +364,7 @@ window.setTimeout(function(){
 
   gBrowser.tabContainer.addEventListener("TabSelect", function() {
     setCurrentWorkspace();
+    addLastShowedWorkspaceTab();
   }, false);
 
   Services.prefs.addObserver(WORKSPACE_TAB_ENABLED_PREF,function(){
